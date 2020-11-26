@@ -18,7 +18,20 @@ public class StackTest {
         assertEquals(3, stack.pop());
         assertEquals(2, stack.peek());
         assertEquals(2, stack.pop());
-
     }
-    
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyPeek() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
+        Stack stack = new Stack(immutableLinkedList);
+        stack.peek();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyPop() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
+        Stack stack = new Stack(immutableLinkedList);
+        stack.pop();
+    }
 }

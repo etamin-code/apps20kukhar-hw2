@@ -1,6 +1,8 @@
 package ua.edu.ucu.collections.immutable;
 
 import org.junit.Test;
+import ua.edu.ucu.collections.Stack;
+
 import static org.junit.Assert.*;
 
 public class ImmutableArrayListTest {
@@ -123,6 +125,24 @@ public class ImmutableArrayListTest {
 
         assertArrayEquals(arr, array_to_add);
 
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyGet() {
+        ImmutableList immutableArrayList1 = new ImmutableArrayList();
+        immutableArrayList1.get(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyRemove() {
+        ImmutableList immutableArrayList1 = new ImmutableArrayList();
+        immutableArrayList1.remove(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptySet() {
+        ImmutableList immutableArrayList1 = new ImmutableArrayList();
+        immutableArrayList1.set(0, 1);
     }
 
 }

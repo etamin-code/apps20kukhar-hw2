@@ -1,53 +1,37 @@
 package ua.edu.ucu.collections.immutable;
 
 import org.junit.Test;
+import ua.edu.ucu.collections.Queue;
+
 import static org.junit.Assert.*;
 
 public class ImmutableLinkedListTest {
     
-//    @Test
-//    public void testAdd1() throws CloneNotSupportedException {
-//        Node node1 = new Node(), node2 = new Node(), node3 = new Node(), node4 = new Node();
-//        node1.setObject(1);
-//        node2.setObject(2);
-//        node3.setObject(3);
-//        node4.setObject(4);
-//
-//        node1.setNext(node2);
-//        node2.setNext(node3);
-//        node3.setNext(node4);
-//
-//        node2.setPrevious(node1);
-//        node3.setPrevious(node2);
-//        node4.setPrevious(node3);
-//
-//        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(node1, node4, 4);
-//        ImmutableLinkedList immutableLinkedList1 = immutableLinkedList.copy();
-//        System.out.println(immutableLinkedList1.getFirst());
-//        System.out.println(immutableLinkedList1.get(0));
-//        System.out.println(immutableLinkedList1.get(1));
-//        System.out.println(immutableLinkedList1.get(2));
-//        System.out.println(immutableLinkedList1.get(3));
-//        System.out.println(immutableLinkedList1.getLast());
-//
-//
-//
-//    }
 
-    @Test
+    @Test (expected = IndexOutOfBoundsException.class)
     public void testAdd() {
         ImmutableList immutableLinkedList1 = new ImmutableLinkedList();
+
         ImmutableList immutableLinkedList2 = immutableLinkedList1.add(5);
         assertSame(5, immutableLinkedList2.get(0));
+
         immutableLinkedList1 = immutableLinkedList2.add(6);
         assertSame(5, immutableLinkedList1.get(0));
         assertSame(6, immutableLinkedList1.get(1));
+
         immutableLinkedList2 = immutableLinkedList1.add(7);
         assertSame(5, immutableLinkedList2.get(0));
         assertSame(6, immutableLinkedList2.get(1));
         assertSame(7, immutableLinkedList2.get(2));
+
         immutableLinkedList1 = immutableLinkedList2.add(1, 10);
         assertSame(10, immutableLinkedList1.get(1));
+
+        immutableLinkedList2 = immutableLinkedList1.add(4, 7);
+        assertSame(7, immutableLinkedList1.get(4));
+
+        immutableLinkedList2.add(8, 10);
+
     }
 
     @Test
@@ -153,6 +137,50 @@ public class ImmutableLinkedListTest {
 
         assertArrayEquals(arr, array_to_add);
 
+    }
+
+    @Test
+    public void testGetLast() {
+        ImmutableLinkedList immutableLinkedList1 = new ImmutableLinkedList();
+
+        Object[] array_to_add = {1, 2, 3};
+        ImmutableLinkedList immutableLinkedList2 = (ImmutableLinkedList) immutableLinkedList1.addAll(array_to_add);
+
+        Node last = (Node) immutableLinkedList2.getLast();
+        assertEquals(3, last.getObject());
+    }
+
+    @Test
+    public void testGetFirst() {
+        ImmutableLinkedList immutableLinkedList1 = new ImmutableLinkedList();
+
+        Object[] array_to_add = {1, 2, 3};
+        ImmutableLinkedList immutableLinkedList2 = (ImmutableLinkedList) immutableLinkedList1.addAll(array_to_add);
+
+        Node first = (Node) immutableLinkedList2.getFirst();
+        assertEquals(1, first.getObject());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyRemoveFirst() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
+        immutableLinkedList.removeFirst();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmptyRemoveLast() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
+        immutableLinkedList.removeLast();
+    }
+
+    @Test
+    public void testRemoveLast() {
+        ImmutableLinkedList immutableLinkedList1 = new ImmutableLinkedList();
+        ImmutableLinkedList immutableLinkedList2 = (ImmutableLinkedList) immutableLinkedList1.add(1);
+        assertTrue(immutableLinkedList2.removeLast().isEmpty());
+
+        immutableLinkedList1 = (ImmutableLinkedList) immutableLinkedList2.add(2);
+        assertEquals(1, immutableLinkedList1.size());
     }
 
 }

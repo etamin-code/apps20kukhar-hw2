@@ -40,7 +40,7 @@ public class ImmutableArrayList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index < 0 | index > size) {
+        if (index < 0 | index > size - 1) {
             throw new IllegalArgumentException();
         }
         return elements[index];
@@ -48,7 +48,7 @@ public class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList remove(int index) {
-        if (index < 0 | index > size) {
+        if (index < 0 | index > size - 1) {
             throw new IllegalArgumentException();
         }
         ImmutableArrayList newArray = new ImmutableArrayList();
@@ -62,7 +62,7 @@ public class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList set(int index, Object e) {
-        if (index < 0 | index > size) {
+        if (index < 0 | index > size - 1) {
             throw new IllegalArgumentException();
         }
         ImmutableArrayList newArray = new ImmutableArrayList();
