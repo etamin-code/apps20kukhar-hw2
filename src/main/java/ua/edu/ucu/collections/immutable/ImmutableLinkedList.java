@@ -162,7 +162,8 @@ public class ImmutableLinkedList implements ImmutableList {
 
         Node[] arrayOfNodes = fromObjectToNodeArray(c);
         if (size == 0) {
-            return new ImmutableLinkedList(arrayOfNodes[0], arrayOfNodes[c.length - 1], c.length);
+            return new ImmutableLinkedList(arrayOfNodes[0],
+                    arrayOfNodes[c.length - 1], c.length);
         }
 
         ImmutableLinkedList newList = copy();

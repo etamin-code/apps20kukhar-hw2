@@ -24,22 +24,23 @@ public class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(int index, Object[] c) {
-        ImmutableArrayList new_array = new ImmutableArrayList();
+        ImmutableArrayList newArray = new ImmutableArrayList();
 
-        Object new_elements[] = new Object[size + c.length];
-        System.arraycopy(this.elements, 0, new_elements, 0, index);
-        System.arraycopy(c, 0, new_elements, index, c.length);
-        System.arraycopy(this.elements, index, new_elements, index + c.length, this.size - index);
+        Object[] newElements = new Object[size + c.length];
+        System.arraycopy(this.elements, 0, newElements, 0, index);
+        System.arraycopy(c, 0, newElements, index, c.length);
+        System.arraycopy(this.elements, index, newElements,
+                index + c.length, this.size - index);
 
-        new_array.size = this.size + c.length;
-        new_array.elements = new_elements;
-        return new_array;
+        newArray.size = this.size + c.length;
+        newArray.elements = newElements;
+        return newArray;
 
     }
 
     @Override
     public Object get(int index) {
-        if (index < 0 | index > size){
+        if (index < 0 | index > size) {
             throw new IllegalArgumentException();
         }
         return elements[index];
@@ -47,27 +48,28 @@ public class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList remove(int index) {
-        if (index < 0 | index > size){
+        if (index < 0 | index > size) {
             throw new IllegalArgumentException();
         }
-        ImmutableArrayList new_array = new ImmutableArrayList();
-        Object[] new_elements = elements;
-        System.arraycopy(new_elements, index + 1, new_elements, index, size - 1 - index);
-        new_array.elements = new_elements;
-        new_array.size = size - 1;
-        return new_array;
+        ImmutableArrayList newArray = new ImmutableArrayList();
+        Object[] newElements = elements;
+        System.arraycopy(newElements, index + 1, newElements,
+                index, size - 1 - index);
+        newArray.elements = newElements;
+        newArray.size = size - 1;
+        return newArray;
     }
 
     @Override
     public ImmutableList set(int index, Object e) {
-        if (index < 0 | index > size){
+        if (index < 0 | index > size) {
             throw new IllegalArgumentException();
         }
-        ImmutableArrayList new_array = new ImmutableArrayList();
-        new_array.elements = elements;
-        new_array.elements[index] = e;
-        new_array.size = size;
-        return new_array;
+        ImmutableArrayList newArray = new ImmutableArrayList();
+        newArray.elements = elements;
+        newArray.elements[index] = e;
+        newArray.size = size;
+        return newArray;
     }
 
     @Override
