@@ -24,7 +24,7 @@ public class Queue {
         }
         Node first = (Node) queue.getFirst();
         queue.removeFirst();
-        return first;
+        return first.getObject();
     }
 
     public void enqueue(Object e) {
